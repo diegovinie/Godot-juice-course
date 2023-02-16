@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://b5uyful5m0wg5"]
+[gd_scene load_steps=4 format=3 uid="uid://b5uyful5m0wg5"]
 
 [ext_resource type="FontFile" uid="uid://br01odh1twpni" path="res://shared/fonts/aldo_the_apache/AldotheApache.ttf" id="1"]
 [ext_resource type="Script" path="res://scenes/ui/stage_clear/stage_clear.gd" id="2"]
+[ext_resource type="Theme" uid="uid://8wej1kve5gix" path="res://scenes/ui/shared/theme.tres" id="3_ihxgv"]
 
 [node name="StageClear" type="Control"]
 layout_mode = 3
@@ -26,15 +27,18 @@ theme_override_font_sizes/font_size = 200
 text = "STAGE CLEAR"
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="."]
-layout_mode = 0
+layout_mode = 1
+anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -472.0
-offset_top = -156.0
+offset_top = -186.0
 offset_right = 472.0
-offset_bottom = 292.0
+offset_bottom = 320.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer2"]
 layout_mode = 2
@@ -46,25 +50,37 @@ size_flags_horizontal = 3
 [node name="Label" type="Label" parent="VBoxContainer2/HBoxContainer/VBoxContainer2"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1")
-theme_override_font_sizes/font_size = 80
+theme_override_font_sizes/font_size = 60
 text = "TIME"
 
 [node name="Label2" type="Label" parent="VBoxContainer2/HBoxContainer/VBoxContainer2"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1")
-theme_override_font_sizes/font_size = 80
-text = "BUMPS"
+theme_override_font_sizes/font_size = 60
+text = "EARLY BUMPS"
+
+[node name="Label5" type="Label" parent="VBoxContainer2/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1")
+theme_override_font_sizes/font_size = 60
+text = "LATE BUMPS"
+
+[node name="Label6" type="Label" parent="VBoxContainer2/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1")
+theme_override_font_sizes/font_size = 60
+text = "PERFECT BUMPS"
 
 [node name="Label3" type="Label" parent="VBoxContainer2/HBoxContainer/VBoxContainer2"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1")
-theme_override_font_sizes/font_size = 80
+theme_override_font_sizes/font_size = 60
 text = "BALL BOUNCES"
 
 [node name="Label4" type="Label" parent="VBoxContainer2/HBoxContainer/VBoxContainer2"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1")
-theme_override_font_sizes/font_size = 80
+theme_override_font_sizes/font_size = 60
 text = "Score"
 
 [node name="VBoxContainer3" type="VBoxContainer" parent="VBoxContainer2/HBoxContainer"]
@@ -74,25 +90,37 @@ size_flags_horizontal = 3
 [node name="Time" type="Label" parent="VBoxContainer2/HBoxContainer/VBoxContainer3"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1")
-theme_override_font_sizes/font_size = 80
+theme_override_font_sizes/font_size = 60
 text = "10000"
 
-[node name="Bumps" type="Label" parent="VBoxContainer2/HBoxContainer/VBoxContainer3"]
+[node name="EarlyBumps" type="Label" parent="VBoxContainer2/HBoxContainer/VBoxContainer3"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1")
-theme_override_font_sizes/font_size = 80
+theme_override_font_sizes/font_size = 60
+text = "50"
+
+[node name="LateBumps" type="Label" parent="VBoxContainer2/HBoxContainer/VBoxContainer3"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1")
+theme_override_font_sizes/font_size = 60
+text = "50"
+
+[node name="PerfectBumps" type="Label" parent="VBoxContainer2/HBoxContainer/VBoxContainer3"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1")
+theme_override_font_sizes/font_size = 60
 text = "50"
 
 [node name="Bounces" type="Label" parent="VBoxContainer2/HBoxContainer/VBoxContainer3"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1")
-theme_override_font_sizes/font_size = 80
+theme_override_font_sizes/font_size = 60
 text = "120"
 
 [node name="Score" type="Label" parent="VBoxContainer2/HBoxContainer/VBoxContainer3"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1")
-theme_override_font_sizes/font_size = 80
+theme_override_font_sizes/font_size = 60
 text = "1000000"
 
 [node name="VSeparator" type="VSeparator" parent="VBoxContainer2"]
@@ -110,7 +138,7 @@ theme_override_fonts/font = ExtResource("1")
 theme_override_font_sizes/font_size = 80
 text = "FINAL SCORE"
 
-[node name="Label2" type="Label" parent="VBoxContainer2/HBoxContainer2"]
+[node name="FinalScore" type="Label" parent="VBoxContainer2/HBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_fonts/font = ExtResource("1")
@@ -132,6 +160,7 @@ offset_bottom = -80.0
 custom_minimum_size = Vector2(0, 90)
 layout_mode = 2
 size_flags_vertical = 2
+theme = ExtResource("3_ihxgv")
 theme_override_fonts/font = ExtResource("1")
 theme_override_font_sizes/font_size = 80
 text = "NEXT"
