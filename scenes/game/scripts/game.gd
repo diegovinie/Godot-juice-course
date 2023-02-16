@@ -22,6 +22,8 @@ var score_brick_touched: int = 50
 var score: int = 0
 var combo: int = 0
 var bricks: Array
+var time: float = 0
+var started: bool = false
 
 func _ready() -> void:
 	randomize()
@@ -36,6 +38,10 @@ func _ready() -> void:
 	# Remove for testing with predefined bricks
 	remove_all_bricks()
 	layout_bricks()
+	
+func _process(delta) -> void:
+	if not started: return
+	time += delta
 		
 func layout_bricks() -> void:
 	var max_bricks: int = spawn_pos_container.get_child_count()
@@ -53,6 +59,7 @@ func add_brick(parent: Node, pos: Vector2) -> void:
 	bricks.append(instance)
 	
 func remove_all_bricks() -> void:
+	bricks.clear()
 	for brick in brick_container.get_children():
 		brick.queue_free()
 	
@@ -92,10 +99,13 @@ func on_brick_destroyed(which) -> void:
 	combo += 1
 	combo_timer.start()
 	score += score_brick_destroyed * combo
+	Globals.stats["score"] = score
 	score_ui.set_score(score)
 	
 	if bricks.is_empty():
+		started = false
 		paddle.stage_clear = true
+		Globals.stats["time"] = time
 		reset_and_attach_ball()
 		show_stage_clear()
 
@@ -129,6 +139,7 @@ func _on_ball_hit_block(block) -> void:
 	combo += 1
 	combo_timer.start()
 	score += score_brick_touched * combo
+	Globals.stats["score"] = score
 	score_ui.set_score(score)
 
 func on_energy_brick_destroyed() -> void:
@@ -138,7 +149,9 @@ func on_game_over_retry() -> void:
 	reset_and_attach_ball()
 	reset_health()
 	reset_energy()
-	reset_energy()
+	reset_score()
+	time = 0.0
+	Globals.reset_stats()
 	remove_all_bricks()
 	layout_bricks()
 
@@ -146,8 +159,14 @@ func on_stage_clear_next() -> void:
 	reset_and_attach_ball()
 	reset_health()
 	reset_energy()
+	reset_score()
+	time = 0.0
+	Globals.reset_stats()
 	remove_all_bricks()
 	layout_bricks()
 
 func _on_combo_timer_timeout():
 	combo = 0
+
+func _on_paddle_start():
+	started = true

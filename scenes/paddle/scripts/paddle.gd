@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+signal start()
+
 @export var speed: float = 400.0
 @export var bump_force: float = 500.0
 @export var accel: float = 20.0
@@ -72,6 +74,7 @@ func get_bumping() -> bool:
 	return bumping
 	
 func launch_ball() -> void:
+	emit_signal("start")
 	ball_attached.launch()
 	ball_attached = null
 
