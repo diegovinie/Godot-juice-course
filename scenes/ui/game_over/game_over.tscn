@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://canp13qn2ffhd"]
+[gd_scene load_steps=10 format=3 uid="uid://canp13qn2ffhd"]
 
 [ext_resource type="FontFile" uid="uid://br01odh1twpni" path="res://shared/fonts/aldo_the_apache/AldotheApache.ttf" id="1"]
 [ext_resource type="Script" path="res://scenes/ui/game_over/scripts/game_over.gd" id="2"]
+[ext_resource type="Theme" uid="uid://8wej1kve5gix" path="res://scenes/ui/shared/theme.tres" id="3_h2orf"]
 
 [sub_resource type="Gradient" id="5"]
 offsets = PackedFloat32Array(0, 0.993528)
@@ -121,6 +122,8 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("2")
 
 [node name="TextureRect" type="TextureRect" parent="."]
@@ -175,6 +178,7 @@ offset_bottom = -80.0
 custom_minimum_size = Vector2(0, 90)
 layout_mode = 2
 size_flags_vertical = 2
+theme = ExtResource("3_h2orf")
 theme_override_fonts/font = ExtResource("1")
 theme_override_font_sizes/font_size = 80
 text = "RETRY"
@@ -183,6 +187,7 @@ text = "RETRY"
 custom_minimum_size = Vector2(0, 90)
 layout_mode = 2
 size_flags_vertical = 2
+theme = ExtResource("3_h2orf")
 theme_override_fonts/font = ExtResource("1")
 theme_override_font_sizes/font_size = 80
 text = "QUIT"
