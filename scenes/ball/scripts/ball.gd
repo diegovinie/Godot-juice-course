@@ -131,16 +131,19 @@ func bump_boost(who) -> void:
 	if frames_since_paddle_collison > 5 and frames_since_paddle_collison < 20:
 		print("BUMP LATE")
 		boost_factor = boost_factor_late_early
+		Globals.stats["bumps_late"] += 1
 	
 	# Bump perfect
 	elif frames_since_paddle_collison < 5:
 		print("BUMP PERFECT")
 		boost_factor = boost_factor_perfect
+		Globals.stats["bumps_perfect"] += 1
 	
 	# Bump early
 	else:
 		print("BUMP EARLY")
 		boost_factor = boost_factor_late_early
+		Globals.stats["bumps_early"] += 1
 		
 
 func launch() -> void:
