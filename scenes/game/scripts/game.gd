@@ -29,6 +29,8 @@ var started: bool = false
 func _ready() -> void:
 	randomize()
 	
+	hide_combo()
+	
 	ball.attached_to = paddle.launch_point
 	paddle.ball_attached = ball
 	paddle.ball = ball
@@ -96,6 +98,9 @@ func reset_score() -> void:
 func show_combo(combo: int) -> void:
 	combo_lbl.text = "COMBO " + str(combo)
 	combo_lbl.visible = true
+	
+func hide_combo() -> void:
+	combo_lbl.visible = false
 	
 ######### SIGNALS ###########
 func on_brick_destroyed(which) -> void:
@@ -174,7 +179,7 @@ func on_stage_clear_next() -> void:
 
 func _on_combo_timer_timeout():
 	combo = 0
-	combo_lbl.visible = false
+	hide_combo()
 
 func _on_paddle_start():
 	started = true
