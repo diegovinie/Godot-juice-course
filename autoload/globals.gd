@@ -1,5 +1,12 @@
 extends Node
 
+enum BUMP {
+	TOO_FAR,
+	EARLY,
+	LATE,
+	PERFECT
+}
+
 var stats = {
 	"score": 0,
 	"bumps_late": 0,
