@@ -1,8 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://b5uyful5m0wg5"]
+[gd_scene load_steps=6 format=3 uid="uid://b5uyful5m0wg5"]
 
 [ext_resource type="FontFile" uid="uid://br01odh1twpni" path="res://shared/fonts/aldo_the_apache/AldotheApache.ttf" id="1"]
 [ext_resource type="Script" path="res://scenes/ui/stage_clear/stage_clear.gd" id="2"]
+[ext_resource type="Shader" path="res://scenes/ui/stage_clear/effects/blur.gdshader" id="2_tpdoi"]
 [ext_resource type="Theme" uid="uid://8wej1kve5gix" path="res://scenes/ui/shared/theme.tres" id="3_ihxgv"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ntget"]
+shader = ExtResource("2_tpdoi")
+shader_parameter/lod = 1.5
 
 [node name="StageClear" type="Control"]
 layout_mode = 3
@@ -12,6 +17,15 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("2")
+
+[node name="Blur" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_ntget")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 0
