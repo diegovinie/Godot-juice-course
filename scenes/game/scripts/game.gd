@@ -14,6 +14,7 @@ extends Node2D
 @onready var spawn_pos_container: Node = $SpawnPos
 @onready var brick_container: Node = $Bricks
 @onready var combo_timer: Timer = $ComboTimer
+@onready var combo_lbl = $Combo
 
 var health: int = 3
 var energy: float = 0.0
@@ -92,11 +93,16 @@ func reset_score() -> void:
 	score = 0
 	score_ui.set_score(score)
 	
+func show_combo(combo: int) -> void:
+	combo_lbl.text = "COMBO " + str(combo)
+	combo_lbl.visible = true
+	
 ######### SIGNALS ###########
 func on_brick_destroyed(which) -> void:
 	bricks.erase(which)
 	
 	combo += 1
+	show_combo(combo)
 	combo_timer.start()
 	score += score_brick_destroyed * combo
 	Globals.stats["score"] = score
@@ -137,6 +143,7 @@ func _on_ball_hit_block(block) -> void:
 	add_energy(block_energy)
 	if block._destroyed: return
 	combo += 1
+	show_combo(combo)
 	combo_timer.start()
 	score += score_brick_touched * combo
 	Globals.stats["score"] = score
@@ -167,6 +174,7 @@ func on_stage_clear_next() -> void:
 
 func _on_combo_timer_timeout():
 	combo = 0
+	combo_lbl.visible = false
 
 func _on_paddle_start():
 	started = true
