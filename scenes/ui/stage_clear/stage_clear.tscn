@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://b5uyful5m0wg5"]
+[gd_scene load_steps=7 format=3 uid="uid://b5uyful5m0wg5"]
 
 [ext_resource type="FontFile" uid="uid://br01odh1twpni" path="res://shared/fonts/aldo_the_apache/AldotheApache.ttf" id="1"]
 [ext_resource type="Script" path="res://scenes/ui/stage_clear/stage_clear.gd" id="2"]
@@ -8,6 +8,13 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ntget"]
 shader = ExtResource("2_tpdoi")
 shader_parameter/lod = 1.5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_twbca"]
+bg_color = Color(0.0980392, 0.0980392, 0.0980392, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
 
 [node name="StageClear" type="Control"]
 layout_mode = 3
@@ -28,17 +35,21 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Label" type="Label" parent="."]
-layout_mode = 0
+layout_mode = 1
+anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -407.5
-offset_top = 146.0
-offset_right = 407.5
-offset_bottom = 313.0
+offset_left = -546.0
+offset_top = 72.0
+offset_right = 546.0
+offset_bottom = 286.0
 grow_horizontal = 2
 theme_override_fonts/font = ExtResource("1")
 theme_override_font_sizes/font_size = 200
+theme_override_styles/normal = SubResource("StyleBoxFlat_twbca")
 text = "STAGE CLEAR"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="."]
 layout_mode = 1
