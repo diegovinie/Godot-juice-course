@@ -96,11 +96,6 @@ polygon = PackedVector2Array(106, 1189, -151, 1189, -153, -152, 2073, -150, 2070
 position = Vector2(960, 498)
 texture = ExtResource("7")
 
-[node name="Polygon2D" type="Polygon2D" parent="StaticBody2D"]
-visible = false
-antialiased = true
-polygon = PackedVector2Array(16, 16, 1904, 16, 1904, 1064, 2024, 1064, 2024, -104, -104, -104, -104, 1064, 16, 1064)
-
 [node name="Ball" parent="." instance=ExtResource("2")]
 position = Vector2(960, 912)
 

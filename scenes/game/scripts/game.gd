@@ -23,6 +23,7 @@ var score_brick_touched: int = 50
 var score: int = 0
 var combo: int = 0
 var bricks: Array
+var bricks_to_destroy: Array
 var time: float = 0
 var started: bool = false
 
@@ -60,9 +61,12 @@ func add_brick(parent: Node, pos: Vector2) -> void:
 	instance.destroyed.connect(on_brick_destroyed)
 	instance.global_position = pos
 	bricks.append(instance)
+	if instance.type != instance.TYPE.EXPLOSIVE and instance.type != instance.TYPE.ENERGY:
+		bricks_to_destroy.append(instance)
 	
 func remove_all_bricks() -> void:
 	bricks.clear()
+	bricks_to_destroy.clear()
 	for brick in brick_container.get_children():
 		brick.queue_free()
 	
@@ -105,6 +109,7 @@ func hide_combo() -> void:
 ######### SIGNALS ###########
 func on_brick_destroyed(which) -> void:
 	bricks.erase(which)
+	bricks_to_destroy.erase(which)
 	
 	combo += 1
 	show_combo(combo)
@@ -113,7 +118,7 @@ func on_brick_destroyed(which) -> void:
 	Globals.stats["score"] = score
 	score_ui.set_score(score)
 	
-	if bricks.is_empty():
+	if bricks_to_destroy.is_empty():
 		started = false
 		paddle.stage_clear = true
 		Globals.stats["time"] = time
