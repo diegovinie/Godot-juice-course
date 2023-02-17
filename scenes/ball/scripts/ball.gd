@@ -2,6 +2,8 @@ extends CharacterBody2D
 
 signal hit_block(block)
 
+@export var bump_timing_scene: PackedScene = preload("res://scenes/effects/bump/bump_timing.tscn")
+
 @export var speed: float = 400.0
 @export var accel: float = 20.0
 @export var deccel: float = 10.0
@@ -117,6 +119,12 @@ func attract(global_position) -> void:
 	attracted = true
 	attracted_to = global_position
 	
+func spawn_bump_timing(type) -> void:
+	var instance = bump_timing_scene.instantiate()
+	instance.type = type
+	get_parent().add_child(instance)
+	instance.global_position = global_position
+	
 func bump_boost(who) -> void:
 	var distance = who.global_position.distance_to(global_position)
 	var contact_distance = distance - $CollisionShape2D.shape.radius - (who.thickness / 2.0)
@@ -125,6 +133,7 @@ func bump_boost(who) -> void:
 	if contact_distance > max_bump_distance: 
 		print("BUMP TOO FAR")
 		boost_factor = 1.0
+		spawn_bump_timing(Globals.BUMP.TOO_FAR)
 		return
 	
 	# We had a collision recently and we're now boosting: LATE
@@ -132,19 +141,21 @@ func bump_boost(who) -> void:
 		print("BUMP LATE")
 		boost_factor = boost_factor_late_early
 		Globals.stats["bumps_late"] += 1
+		spawn_bump_timing(Globals.BUMP.LATE)
 	
 	# Bump perfect
 	elif frames_since_paddle_collison < 5:
 		print("BUMP PERFECT")
 		boost_factor = boost_factor_perfect
 		Globals.stats["bumps_perfect"] += 1
+		spawn_bump_timing(Globals.BUMP.PERFECT)
 	
 	# Bump early
 	else:
 		print("BUMP EARLY")
 		boost_factor = boost_factor_late_early
 		Globals.stats["bumps_early"] += 1
-		
+		spawn_bump_timing(Globals.BUMP.EARLY)
 
 func launch() -> void:
 #	velocity = (-global_transform.y).rotated(randf_range(-PI/3.0, PI/3.0)) * speed
