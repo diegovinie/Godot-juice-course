@@ -26,6 +26,9 @@ var boost_factor: float = 1.0
 var boost_factor_perfect: float = 1.3
 var boost_factor_late_early: float = 1.15
 
+@onready var animation_player = $AnimationPlayer
+@onready var sprite = $Sprite2D
+
 func _ready() -> void:
 	randomize()
 
@@ -55,6 +58,8 @@ func _physics_process(delta: float) -> void:
 	Globals.stats["ball_bounces"] += 1
 	
 	var normal = collision.get_normal()
+	sprite.rotation = -normal.angle()
+	animation_player.play("bounce")
 	# Update the normal with the paddle's velocity if we collide with
 	# the paddle
 	if collision.get_collider().is_in_group("Paddle"):
