@@ -59,7 +59,7 @@ func _physics_process(delta: float) -> void:
 	
 	var normal = collision.get_normal()
 	sprite.rotation = -normal.angle()
-	animation_player.play("bounce")
+
 	# Update the normal with the paddle's velocity if we collide with
 	# the paddle
 	if collision.get_collider().is_in_group("Paddle"):
