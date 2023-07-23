@@ -1,11 +1,67 @@
-[gd_scene load_steps=3 format=3 uid="uid://bf0hn220saeh8"]
+[gd_scene load_steps=7 format=3 uid="uid://bf0hn220saeh8"]
 
 [ext_resource type="Script" path="res://scenes/paddle/scripts/laser.gd" id="1"]
 
 [sub_resource type="RectangleShape2D" id="4"]
 size = Vector2(152.522, 1298)
 
+[sub_resource type="Animation" id="Animation_2eb0b"]
+resource_name = "start"
+length = 0.1
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Line2D:width")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(2, 1),
+"update": 0,
+"values": [20.0, 152.522]
+}
+
+[sub_resource type="Animation" id="Animation_h7nxu"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Line2D:width")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [152.522]
+}
+
+[sub_resource type="Animation" id="Animation_yu66w"]
+resource_name = "stop"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Line2D:width")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(0.5, 1),
+"update": 0,
+"values": [155.0, 20.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_dghuc"]
+_data = {
+"RESET": SubResource("Animation_h7nxu"),
+"start": SubResource("Animation_2eb0b"),
+"stop": SubResource("Animation_yu66w")
+}
+
 [node name="Laser" type="Area2D"]
+position = Vector2(23, 519)
 collision_layer = 4
 collision_mask = 4
 script = ExtResource("1")
@@ -23,6 +79,11 @@ default_color = Color(0.996078, 0.00784314, 0.309804, 1)
 
 [node name="AttackTime" type="Timer" parent="."]
 wait_time = 0.8
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_dghuc")
+}
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="timeout" from="AttackTime" to="." method="_on_AttackTime_timeout"]

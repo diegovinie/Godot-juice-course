@@ -1,0 +1,45 @@
+[gd_scene load_steps=8 format=3 uid="uid://d4h6ee86it6r0"]
+
+[ext_resource type="Texture2D" uid="uid://doqriorw2lonx" path="res://scenes/ball/visuals/ball.png" id="1_twak5"]
+[ext_resource type="Script" path="res://scenes/brick/scripts/bomb_explode_particles.gd" id="2_b45p1"]
+
+[sub_resource type="Gradient" id="Gradient_ldexn"]
+offsets = PackedFloat32Array(0, 0.266497, 0.624366, 1)
+colors = PackedColorArray(0.933333, 1, 0, 1, 0.901961, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_a3rdx"]
+gradient = SubResource("Gradient_ldexn")
+
+[sub_resource type="Curve" id="Curve_2las4"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.070122, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_ufsjv"]
+curve = SubResource("Curve_2las4")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_su5sm"]
+emission_shape = 2
+emission_sphere_radius = 290.0
+particle_flag_disable_z = true
+spread = 180.0
+gravity = Vector3(0, 0, 0)
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+scale_min = 0.5
+scale_max = 0.9
+scale_curve = SubResource("CurveTexture_ufsjv")
+color_ramp = SubResource("GradientTexture1D_a3rdx")
+
+[node name="BombExplosionParticles" type="GPUParticles2D"]
+emitting = false
+amount = 141
+process_material = SubResource("ParticleProcessMaterial_su5sm")
+texture = ExtResource("1_twak5")
+lifetime = 0.5
+one_shot = true
+explosiveness = 0.67
+script = ExtResource("2_b45p1")
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

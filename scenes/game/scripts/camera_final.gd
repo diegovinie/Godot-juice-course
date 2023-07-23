@@ -25,7 +25,7 @@ func _ready():
 	set_process(true)
 
 # Shake with decreasing intensity while there's time remaining.
-func _process(delta):
+func _process(delta):	
 	if target:
 		follow_target(delta)
 	elif dynamic_enabled and objects != null:

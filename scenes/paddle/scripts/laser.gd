@@ -1,14 +1,18 @@
 extends Area2D
 
 var attacking: bool = false
+@onready var anim = $AnimationPlayer
 
 func _ready() -> void:
 	visible = false
 	
 func _show() -> void:
 	visible = true
+	anim.play("start")
 	
 func _hide() -> void:
+	anim.play("stop")
+	await anim.animation_finished
 	visible = false
 
 func shoot() -> void:
